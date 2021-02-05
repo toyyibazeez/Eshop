@@ -15,21 +15,27 @@ namespace Eshop.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var categories = productService.GetProducts();
-            return View(categories);
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ProductTable(string search)
+        {
+            var products = productService.GetProducts();
+            return PartialView(products);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
         public ActionResult Create(Product product)
         {
             productService.SaveProduct(product);
-            return View();
+            return RedirectToAction("ProductTable");
         }
 
         [HttpGet]
