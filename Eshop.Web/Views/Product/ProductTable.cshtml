@@ -12,30 +12,33 @@
     </form>
     <button>New</button>
 </div>
-<table>
-    <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-      @foreach (var product in Model)
-      {
-        <tr>
-            <td>@product.Name</td>
-            <td>-</td>
-            <td>@product.Price</td>
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>
-      }
-    </tbody>9
-</table>
+<div id="tableContainer">
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>-</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>9
+    </table>
+</div>
+
 
 
 <script>
