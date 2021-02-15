@@ -22,6 +22,10 @@ namespace Eshop.Web.Controllers
         public ActionResult ProductTable(string search)
         {
             var products = productService.GetProducts();
+            if (!string.IsNullOrEmpty(search))
+            {
+                products = products.Where(p => p.Name.ToLower().Contains(search.ToLower())).ToList();
+            }
             return PartialView(products);
         }
 
@@ -49,7 +53,7 @@ namespace Eshop.Web.Controllers
         public ActionResult Edit(Product product)
         {
             productService.UpdateProduct(product);
-            return RedirectToAction("Index");
+            return RedirectToAction("ProductTable");
         }
 
         [HttpGet]

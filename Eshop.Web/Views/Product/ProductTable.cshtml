@@ -6,13 +6,13 @@
 
 <h2>Product List</h2>
 <div>
-    <form method="post" action="/Product/ProductTable">
+    <form method="post">
         <input type="text" id="serchText" name="Search" />
-        <button id="searchBtn">Search</button>
+        <button id="searchBtn" type="button">Search</button>
     </form>
-    <button>New</button>
+    <button id="newBtn" type="button">New</button>
 </div>
-<div id="tableContainer">
+
     <table>
         <thead>
             <tr>
@@ -30,19 +30,19 @@
                     <td>-</td>
                     <td>@product.Price</td>
                     <td>
-                        <button>Edit</button>
+                        <button data-id="@product.ID" class="editBtn">Edit</button>
                         <button>Delete</button>
                     </td>
                 </tr>
             }
-        </tbody>9
+        </tbody>
     </table>
-</div>
+
 
 
 
 <script>
-    $("searchBtn").click(function () {
+    $("#searchBtn").click(function () {
         let searchValue = $("#serchText").val()
 
         $.ajax({
@@ -52,10 +52,35 @@
             }
         })
             .done(function (response) {
-                alert(response)
+                $("#tableContainer").html(response);
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert()
+                alert("FAIL")
+            })
+    })
+    $("#newBtn").click(function () {
+        $.ajax({
+            url: '/Product/Create',
+        })
+            .done(function (response) {
+                $("#actionContainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL")
+            })
+    })
+    $(".editBtn").click(function () {
+        $.ajax({
+            url: '/Product/Edit',
+            data: {
+                ID: $(this).attr('data-id')
+            }
+        })
+            .done(function (response) {
+                $("#actionContainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL")
             })
     })
 </script>
